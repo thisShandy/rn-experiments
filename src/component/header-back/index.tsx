@@ -14,6 +14,7 @@ const HeaderBack = () => {
     <SafeAreaView style={styles.warpper}>
       <View style={styles.container}>
         <Pressable
+          style={styles.back}
           onPressIn={() => {
             opacity.value = withTiming(0.5, { duration: 120 });
           }}
@@ -46,6 +47,19 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 48,
     paddingHorizontal: 12
+  },
+
+  back: {
+    alignItems: "center",
+    justifyContent: "center",
+
+    width: 32,
+    height: 32,
+
+    borderRadius: 99,
+    backgroundColor: "rgba(0, 0, 0, .5)",
+
+    cursor: "pointer"
   },
 
   text: {},
