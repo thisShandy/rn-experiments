@@ -15,6 +15,8 @@ const ProfileView = () => {
     animatedStyles,
   } = useProFileAnimation();
 
+  let isDragging = false;
+
   return (
     <GestureDetector gesture={scrollGesture}>
       <Animated.ScrollView
@@ -24,6 +26,22 @@ const ProfileView = () => {
         alwaysBounceVertical
         overScrollMode="always"
         scrollEventThrottle={16}
+        onScrollBeginDrag={() => {
+          isDragging = true;
+        }}
+        onScrollEndDrag={() => {
+          isDragging = false;
+        }}
+        onMomentumScrollEnd={(e) => {
+          const y = e.nativeEvent.contentOffset.y;
+
+          if (y < 0 && !isDragging) {
+            scrollRef.current?.scrollTo({
+              y: 0,
+              animated: true,
+            });
+          }
+        }}
         contentContainerStyle={{
           alignItems: "flex-start",
           justifyContent: "flex-start",

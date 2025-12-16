@@ -23,7 +23,7 @@ const LIMIT = 128;
 const END = 126;
 
 const ARM_AFTER_PX = 24;
-const PULL_RESET = 128;
+const PULL_RESET = 48;
 
 const JELLY_HIDE = Easing.exp;
 
@@ -86,9 +86,9 @@ export const useProFileAnimation = () => {
         armed.value = true;
       }
 
-      // if (armed.value && y <= -PULL_RESET) {
-      //   resetToExpanded();
-      // }
+      if (armed.value && y <= -PULL_RESET) {
+        resetToExpanded();
+      }
     },
   });
 
@@ -166,7 +166,7 @@ export const useProFileAnimation = () => {
   });
 
   const shadowAnimatedStyle = useAnimatedStyle(() => {
-    const opacity = interpolate(animationProg.value, [0, 1], [0, 1]);
+    const opacity = interpolate(animationProg.value, [0, 1], [1, 0]);
 
     return { opacity };
   });

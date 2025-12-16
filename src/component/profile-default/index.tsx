@@ -25,7 +25,7 @@ interface ProfileDefaultProps {
     photoWrapper: AnimatedStyle<ViewStyle>;
     photo: AnimatedStyle<ImageStyle>;
     text: AnimatedStyle<TextStyle>;
-    shadow: AnimatedStyle;
+    shadow: AnimatedStyle<ViewStyle>;
   }
 }
 
@@ -35,17 +35,20 @@ const ProfileDefault: FC<ProfileDefaultProps> = ({ animatedStyles }) => {
       <Animated.View style={[styles.photoWrapper, animatedStyles.photoWrapper]}>
         <Animated.Image
           style={[styles.photo, animatedStyles.photo]}
-          source={require("./assets/profile_2.jpg")}
+          source={require("./assets/profile_3.jpg")}
           resizeMode="cover"
         />
       </Animated.View>
-      <Shadow
-        offset={[0, -12]}
-        distance={256}
-        startColor="rgba(0, 0, 0, 0.65)"
-        endColor="rgba(0, 0, 0, 0)"
-        style={styles.shadow}
-      >
+      <Animated.View style={[styles.shadowWrapper, animatedStyles.shadow]}>
+        <Shadow
+          offset={[0, -12]}
+          distance={256}
+          startColor="rgba(0, 0, 0, 0.65)"
+          endColor="rgba(0, 0, 0, 0)"
+          style={styles.shadow}
+        />
+      </Animated.View>
+      <View style={styles.info}>
         <View style={styles.content}>
           <Animated.Text style={[styles.contentName, animatedStyles.text]}>John Doe</Animated.Text>
           <View style={styles.contentInfo}>
@@ -63,7 +66,7 @@ const ProfileDefault: FC<ProfileDefaultProps> = ({ animatedStyles }) => {
             <Text style={styles.controlText}>Follow</Text>
           </ButtonUi>
         </View>
-      </Shadow>
+      </View>
     </Animated.View>
   );
 };
@@ -72,6 +75,8 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "flex-end",
+
+    position: "relative",
 
     width: "100%",
     height: INITIAL_HEIGHT,
@@ -94,12 +99,19 @@ const styles = StyleSheet.create({
     height: "100%"
   },
 
-  shadow: {
-    gap: 12,
+  shadowWrapper: {
+    position: "absolute",
+    bottom: 0,
+  },
 
+  shadow: {
     width: Dimensions.get("window").width,
-    paddingBottom: 24,
-    marginBottom: -24
+    paddingBottom: 72
+  },
+
+  info: {
+    gap: 12,
+    width: Dimensions.get("window").width,
   },
 
   content: {
